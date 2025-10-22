@@ -13,9 +13,10 @@ jobs:
     uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/java-ci.yml@main
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     with:
       workflow: "java"
-      releaseId: "REL-1234687d9SssF3r1w"
+      releaseId: "REL-1234687d9SsdsF3r1w"
       projectId: "PROJ-999"
       region: "DIGITAL"
       csild: "CS-456"
