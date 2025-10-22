@@ -9,7 +9,7 @@ jobs:
     uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/java-ci.yml@main
     with:
       workflow: "java"
-      releaseId: "REL-123"
+      releaseId: "REL-12"
       projectId: "PROJ-999"
       region: "DIGITAL"
       csild: "CS-456"
