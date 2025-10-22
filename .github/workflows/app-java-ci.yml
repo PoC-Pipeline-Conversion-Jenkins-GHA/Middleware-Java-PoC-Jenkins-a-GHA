@@ -1,12 +1,12 @@
-# .github/workflows/app-ci.yml
-name: App CI
+# .github/workflows/app-java-ci.yml
+name: App Java CI
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  pipeline:
-    uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/pipeline.yml@main
+  java-ci:
+    uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/java-ci.yml@main
     with:
       workflow: "java"
       releaseId: "REL-123"
