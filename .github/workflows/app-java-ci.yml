@@ -15,7 +15,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
       workflow: "java"
-      releaseId: "REL-1234687d93r1w"
+      releaseId: "REL-1234687d9F3r1w"
       projectId: "PROJ-999"
       region: "DIGITAL"
       csild: "CS-456"
