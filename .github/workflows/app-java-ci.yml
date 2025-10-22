@@ -14,7 +14,7 @@ jobs:
     secrets: inherit
     with:
       workflow: "java"
-      releaseId: "REL-123467"
+      releaseId: "REL-1234687"
       projectId: "PROJ-999"
       region: "DIGITAL"
       csild: "CS-456"
