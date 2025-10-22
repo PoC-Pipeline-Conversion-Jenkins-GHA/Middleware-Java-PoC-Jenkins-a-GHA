@@ -6,7 +6,7 @@ on:
 
 jobs:
   copy:
-    uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/blob/main/.github/workflows/orchestrators/main.yml
+    uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/orchestrators/main.yml
     with:
       workflow: "copy"
       releaseId: "REL-123"
