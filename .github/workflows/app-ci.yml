@@ -5,10 +5,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  copy:
+  pipeline:
     uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/pipeline.yml@main
     with:
-      workflow: "copy"
+      workflow: "java"
       releaseId: "REL-123"
       projectId: "PROJ-999"
       region: "DIGITAL"
