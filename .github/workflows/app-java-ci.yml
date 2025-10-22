@@ -11,6 +11,7 @@ jobs:
       id-token: write   # Otorga el permiso 'id-token: write'
       contents: read    # (Buena práctica) Permite el checkout del código
     uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/java-ci.yml@main
+    secrets: inherit
     with:
       workflow: "java"
       releaseId: "REL-123"
