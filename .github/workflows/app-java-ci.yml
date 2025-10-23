@@ -17,7 +17,7 @@ jobs:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     with:
       workflow: "java"
-      releaseId: "REL-1234687d9SdssdsF3r1w"
+      releaseId: "REL-1234687d9SdfssdsF3r1w"
       projectId: "PROJ-999"
       region: "DIGITAL"
       csild: "CS-456"
