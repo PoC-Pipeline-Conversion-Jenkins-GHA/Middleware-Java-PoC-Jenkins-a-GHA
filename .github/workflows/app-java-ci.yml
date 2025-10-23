@@ -12,6 +12,7 @@ jobs:
       contents: read    # (Buena práctica) Permite el checkout del código
       security-events: write # Requerido para subir resultados SARIF
     uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/java-ci.yml@main
+    #Dependencias
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
