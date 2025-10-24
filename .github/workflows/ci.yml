@@ -1,4 +1,8 @@
-name: App Java CI
+# This workflow is the single CI entrypoint for the application repository.
+# Its only job is to call the central orchestrator and pass
+# the correct parameters and secrets.
+
+name: Application CI
 
 on:
   push:
@@ -7,29 +11,47 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # El único job es "llamar" al pipeline centralizado
-  call-reusable-pipeline:
-    name: Call Central CI Pipeline
+  # This job calls the central reusable orchestrator
+  call-central-orchestrator:
+    name: Call Central CI Orchestrator
     
-    # Permisos que el JOB necesita para poder OTORGAR
-    # secretos y permisos al workflow "hijo".
+    # 1. PERMISSIONS
+    # These permissions are CRITICAL. This job must possess
+    # all permissions that the downstream reusable workflows
+    # (build, scan, sign, deploy) will need.
     permissions:
-      # Obligatorio para OIDC o para que el hijo obtenga tokens
-      id-token: write 
-      # Obligatorio para que el hijo pueda hacer checkout
-      contents: read
-      # Obligatorio para que el hijo pueda subir SARIF
-      security-events: write 
+      contents: read           # To allow checkout
+      id-token: write          # For OIDC (e.g., Cosign sign, Azure/AWS deploy)
+      packages: write          # To push packages (e.g., container images to GHCR)
+      security-events: write   # To upload SARIF files (Snyk, Sonar)
 
-    uses: PoC-Pipeline-Conversion-Jenkins-GHA/CICD-PoC-Jenkins-a-GHA/.github/workflows/orchestrator.yml@main # ¡Apunta a tu repo central, usar versionamiento!
+    # 2. THE CALL
+    # This points to your central CICD repository and the orchestrator file.
+    # IMPORTANT: Replace 'tu-organizacion' and '@main' (use a version tag like @v1.0.0)
+    uses: PoC-Pipeline-Conversion-Jenkins-GHA/cicd-template/.github/workflows/orchestrator.yml@main
     
-    # 1. Pasamos los PARÁMETROS (inputs)
+    # 3. INPUTS (with:)
+    # These are the parameters you pass to the orchestrator.
     with:
-      java-version: '17'
-      sonar-project-key: 'mi-app-java-clave-sonar'
-      snyk-org-slug: 'mi-org-snyk'
+      # This is the "profile key" from your list.
+      # The orchestrator uses this to route to the correct jobs.
+      pipeline_profile: 'java-openshift'
+      
+      # Pass-through parameters required by downstream stages (like scan)
+      sonar-project-key: 'my-java-app-sonar-key'
+      snyk-org-slug: 'my-snyk-org'
 
-    # 2. Pasamos los SECRETOS explícitamente
+    # 4. SECRETS
+    # You must pass secrets EXPLICITLY.
+    # This is more secure than 'secrets: inherit'.
     secrets:
+      # Secrets for the 'scan' stage
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      
+      # Secrets for the 'sign' stage (if needed)
+      # SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      
+      # Secrets for the 'deploy' stage
+      # OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+      # (Add other deploy secrets as needed, e.g., AWS_ROLE, AZURE_CREDS)
