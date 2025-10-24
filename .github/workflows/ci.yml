@@ -37,15 +37,6 @@ jobs:
       # The orchestrator uses this to route to the correct jobs.
       #pipeline_profile: 'java-openshift'
       pipeline_profile: 'java-openshift'
-      artifact-name: 'mi-aplicacion-web' # (Esto se usa para 'artifact-name')
-      tomcat-host: ${{ secrets.TOMCAT_HOST }} # El host se guarda como un secret
-      tomcat-user: 'ec2-user'
-      target-war-name: 'mi-app.war'
-      tomcat-webapps-path: '/opt/tomcat/webapps'
-      
-      # Pass-through parameters required by downstream stages (like scan)
-      sonar-project-key: 'my-java-app-sonar-key'
-      snyk-org-slug: 'my-snyk-org'
 
     # 4. SECRETS
     # You must pass secrets EXPLICITLY.
